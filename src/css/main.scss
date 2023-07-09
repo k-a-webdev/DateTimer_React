@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+body{
+    overflow: hidden;
+    color: #fff;
+}
+
+#root {
+    width: 100%;
+    height: 100vh;
+    background: #af45e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.App {
+    background: #311c55;
+    border-radius: 10px;
+    padding: 20px;
+    width: 75%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+        margin-bottom: 10px;
+    }
+    
+    form {
+        display: flex;
+    }
+}
+
+.popUp_blur{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: rgba(#333, 0.6);
+    backdrop-filter: blur(3px);
+}
+.Error {
+    position: absolute;
+    top: calc(100vh - 75% - 12.5%);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ca3838;
+    border-radius: 10px;
+    padding: 15px;
+    width: auto;
+
+    h1 {
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .Error__close {
+        float: right;
+        scale: 1.5;
+        cursor: pointer;
+    }
+}
+
+.text {
+    p {
+        line-height: 1.5;
+    }
+}
+
+.timer {
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    margin: 20px 0;
+
+    div {
+        text-align: center;
+        margin-right: 20px;
+    }
+}
+
+input[type='date'], .btn {
+    border-radius: 3px;
+    padding: 5px;
+    background: #af45e4;
+    border: #7b0eb1 1px solid;
+    color: #fff;
+    user-select: none;
+    cursor: pointer;
+
+    &:active {
+        border: #7b0eb1 1px inset;
+        background: #7b0eb1;
+    } 
+}
+.btn {
+    margin-left: 20px;
+    
+}
+
+@media (max-width: 480px) {
+    .timer {
+        flex-direction: column;
+
+        div {
+            margin-bottom: 10px;
+        }
+    }
+}
