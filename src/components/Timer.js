@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CalcTimer from "./CalcTimer";
 
 export default function Timer(props) {
@@ -6,45 +6,51 @@ export default function Timer(props) {
     const [timerHours, setTimerHours] = useState(0);
     const [timerMinutes, setTimerMinutes] = useState(0);
     const [timerSeconds, setTimerSeconds] = useState(0);
-    const [timer, setTimer] = useState('')
-    const [tempDate, setTempDate] = useState('')
+    const [timer, setTimer] = useState('');
+    const [tempDate, setTempDate] = useState('');
 
     let myTimer;
-    let localStorageDate = localStorage.getItem('DateTimer') !== null ? new Date(JSON.parse(localStorage.getItem('DateTimer')).prevDate) : null
+    let localStorageDate = localStorage.getItem('DateTimer') !== null ? new Date(JSON.parse(localStorage.getItem('DateTimer')).prevDate) : null;
 
-    function tick() {
-        if (timerDays === '00' && timerHours === '00' && timerMinutes === '00' && timerSeconds === '00') {
-            return
+    // Func for changing time
+    const tick = () => {
+        if (String(timerDays) === '0' && String(timerHours) === '00' && String(timerMinutes) === '00' && String(timerSeconds) === '00') {
+            localStorage.removeItem('DateTimer');
+            props.onStop();
+            return;
         }
     
         setTimer(() => {
-            CalcTimer(props.date)
-            return JSON.parse(localStorage.getItem('DateTimer'))
+            CalcTimer(props.date);
+            return JSON.parse(localStorage.getItem('DateTimer'));
         })
-        setTimerDays(timer.days)
-        setTimerHours(timer.hours)
-        setTimerMinutes(timer.minutes)
-        setTimerSeconds(timer.seconds)
+        setTimerDays(timer.days);
+        setTimerHours(timer.hours);
+        setTimerMinutes(timer.minutes);
+        setTimerSeconds(timer.seconds);
     }
+
+    // Creating a setTimout for constant updating
     myTimer = setTimeout(() => {
-        tick(localStorageDate)
-        myTimer = setTimeout(tick)
-    })
+        tick(localStorageDate);
+        myTimer = setTimeout(tick);
+    });
 
-    if (props.date !== '') {    
+    // If data from the form has updated
+    if (props.date !== null) {    
         if (props.date !== tempDate) {
-            clearTimeout(myTimer)
+            clearTimeout(myTimer);
 
-            setTempDate(props.date)
+            setTempDate(props.date);
             
             myTimer = setTimeout(() => {
-                tick()
-                myTimer = setTimeout(tick)
+                tick();
+                myTimer = setTimeout(tick);
             })
         }    
         
     } else {
-        clearTimeout(myTimer)
+        clearTimeout(myTimer);
     }
 
     return (

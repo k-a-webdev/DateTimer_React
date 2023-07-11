@@ -5,52 +5,60 @@ import Form from "./components/Form";
 import ErrorMessage from "./components/ErrorMessage";
 
 export default function App() {
-  const [isDateError, setIsDateError] = useState(false)
-  const [errorText, setErrorText] = useState('')
-  const [timerDate, setTimerDate] = useState('')
-  const [timeDirection, setTimeDirection] = useState('0')
+  const [isDateError, setIsDateError] = useState(false);
+  const [errorText, setErrorText] = useState('');
+  const [timerDate, setTimerDate] = useState(null);
+  const [timeDirection, setTimeDirection] = useState('0');
 
+  // Func for start timer
   const startTimer = date => {
+    // If empty input of date
     if (date === undefined) {
-      setErrorText('You havn\'t selected a date or this date is already being tracked.')
-      setIsDateError(true)
-      return false
+      setErrorText('You havn\'t selected a date or this date is already being tracked.');
+      setIsDateError(true);
+      return;
     }
 
-    let now = Date.now()
-    now = new Date(now)
-    date = new Date(date)
-    const nowDate = now.toISOString().slice(0, now.toISOString().indexOf('T'))
-    const dateDate = date.toISOString().slice(0, date.toISOString().indexOf('T'))
+    let now = new Date();
+    date = new Date(date);
+    const nowDate = now.toISOString().slice(0, now.toISOString().indexOf('T'));
+    const dateDate = date.toISOString().slice(0, date.toISOString().indexOf('T'));
 
+    // If selected date is today
     if (nowDate === dateDate) {
-      setErrorText('Enter a date that is different from today!')
-      setIsDateError(true)
-      return false
+      setErrorText('Enter a date that is different from today!');
+      setIsDateError(true);
+      return;
     }
 
-    setTimerDate(dateDate)
-    const diffDate = (now - date)
-    if (diffDate < 0) setTimeDirection(1)
-    if (diffDate > 0) setTimeDirection(-1)
+    setTimerDate(dateDate); // Date for timer
+
+    // Choosing a variation of the title
+    const diffDate = (now - date);
+    if (diffDate < 0) setTimeDirection(1);
+    else if (diffDate > 0) setTimeDirection(-1);
 
   }
 
+  // Func on the close button in the error push message
   const closeErrorMessage = () => {
-    setIsDateError(false)
-    document.removeEventListener('click', e => {
-      if (e.target !== errorBox) closeErrorMessage()
-    })
+    setIsDateError(false);
+    document.removeEventListener('click', e => { if (e.target !== errorBox) closeErrorMessage(); });
   }
 
-  let errorBox;
-  let localStorageDate = localStorage.getItem('DateTimer') !== null ? new Date(JSON.parse(localStorage.getItem('DateTimer')).prevDate) : null
+  // When the timer runs out
+  const stopTimer = () => setTimeDirection(0);
+
+  let errorBox; // For ref link Error block
+
+  // If we have a date in localstorage
+  let localStorageDate = localStorage.getItem('DateTimer') !== null ? new Date(JSON.parse(localStorage.getItem('DateTimer')).prevDate) : null;
 
   return (
     <div className="App">
       <Text timeDirection={ timeDirection } />
 
-      <Timer date={ timerDate || localStorageDate } />
+      <Timer date={ timerDate || localStorageDate } onStop={ stopTimer } />
 
       <Form onStart={ startTimer } />
 
