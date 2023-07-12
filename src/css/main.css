@@ -71,6 +71,9 @@ body {
 .text p {
   line-height: 1.5;
 }
+.text h2 {
+  margin-top: 10px;
+}
 
 .timer {
   font-size: 1.3em;
@@ -94,10 +97,11 @@ input[type=date], .btn {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  outline: none;
   cursor: pointer;
 }
 input[type=date]:active, .btn:active {
-  border: #7b0eb1 1px inset;
+  border: #7b0eb1 2px inset;
   background: #7b0eb1;
 }
 
@@ -106,6 +110,10 @@ input[type=date]:active, .btn:active {
 }
 
 @media (max-width: 480px) {
+  .App {
+    width: 100%;
+    height: 100vh;
+  }
   .timer {
     flex-direction: column;
   }

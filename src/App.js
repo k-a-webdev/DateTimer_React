@@ -9,6 +9,7 @@ export default function App() {
   const [errorText, setErrorText] = useState('');
   const [timerDate, setTimerDate] = useState(null);
   const [timeDirection, setTimeDirection] = useState('0');
+  const [textDate, setTextDate] = useState(null)
 
   // Func for start timer
   const startTimer = date => {
@@ -54,11 +55,19 @@ export default function App() {
   // If we have a date in localstorage
   let localStorageDate = localStorage.getItem('DateTimer') !== null ? new Date(JSON.parse(localStorage.getItem('DateTimer')).prevDate) : null;
 
+  // The function with the help of which the date with which the timer works will be displayed
+  const forTextDate = date => setTextDate(() => {
+    try {
+      if (date.indexOf('T') !== -1) return date.slice(0, date.indexOf('T'));
+      else return date;
+    } catch {}
+  })
+
   return (
     <div className="App">
-      <Text timeDirection={ timeDirection } />
+      <Text timeDirection={ timeDirection } date={ textDate } />
 
-      <Timer date={ timerDate || localStorageDate } onStop={ stopTimer } />
+      <Timer date={ timerDate || localStorageDate } onStop={ stopTimer }  onSetTextDate={ forTextDate }/>
 
       <Form onStart={ startTimer } />
 

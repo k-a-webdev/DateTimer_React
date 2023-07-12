@@ -28,6 +28,8 @@ export default function Timer(props) {
         setTimerHours(timer.hours);
         setTimerMinutes(timer.minutes);
         setTimerSeconds(timer.seconds);
+
+        props.onSetTextDate(timer.prevDate)
     }
 
     // Creating a setTimout for constant updating
