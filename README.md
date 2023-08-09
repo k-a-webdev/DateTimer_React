@@ -4,7 +4,7 @@ For this project I used:
 * __CSS__
 * __SCSS__
 * __JS__
-* __ReactJS__ \
+* __ReactJS__
 
 [Link on this website](https://k-a-webdev.github.io/DateTimer_React/)
 
