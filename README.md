@@ -5,6 +5,7 @@ For this project I used:
 * __SCSS__
 * __JS__
 * __ReactJS__
+####[Link on this website](https://k-a-webdev.github.io/DateTimer_React/)
 
 ## Features
 This site is responsive with using localStorage. \
