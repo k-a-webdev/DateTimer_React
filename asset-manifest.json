@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/DateTimer_React/static/css/main.59ef3bfc.css",
+    "main.js": "/DateTimer_React/static/js/main.8a95f950.js",
+    "index.html": "/DateTimer_React/index.html",
+    "main.59ef3bfc.css.map": "/DateTimer_React/static/css/main.59ef3bfc.css.map",
+    "main.8a95f950.js.map": "/DateTimer_React/static/js/main.8a95f950.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.59ef3bfc.css",
+    "static/js/main.8a95f950.js"
+  ]
+}
