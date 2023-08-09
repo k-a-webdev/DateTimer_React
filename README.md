@@ -4,7 +4,7 @@ For this project I used:
 * __CSS__
 * __SCSS__
 * __JS__
-* __React__
+* __ReactJS__
 
 ## Features
 This site is responsive with using localStorage. \
